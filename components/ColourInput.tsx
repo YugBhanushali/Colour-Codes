@@ -4,13 +4,11 @@ import React, { use, useContext, useEffect, useState } from "react";
 import { ColourContext } from "./ColourContext";
 
 const ColourInput = () => {
-  const { inputColour, setInputColour, color, setColor } =
+  const { inputColour, setInputColour, color, setColor , isValid , setIsValid } =
     useContext<any>(ColourContext);
 
   useEffect(() => {
-    console.log(color);
     const test = ColourTypeChecker(inputColour);
-    console.log(test);
     if (test?.type !== "invalid") {
       setColor({
         r: test?.red,
@@ -18,6 +16,15 @@ const ColourInput = () => {
         b: test?.blue,
         a: test?.alpha,
       });
+        setIsValid(true);
+    }
+    else{
+        if(inputColour === ``){
+            setIsValid(true);
+        }
+        else{
+            setIsValid(false);
+        }
     }
   }, [inputColour]);
 
@@ -30,7 +37,7 @@ const ColourInput = () => {
       </div>
       <input
         type="text"
-        className="h-[30px] w-[300px] px-2 py-4 border-black border-2 rounded-lg text-center"
+        className="h-[30px] w-[300px] px-2 py-4 border-black border-2 rounded-lg text-center focus:outline-4 focus:outline-[#007dfa99] focus:outline-offset-2"
         style={{
           boxShadow: `0 2px 10px 5px #0000001f`,
         }}

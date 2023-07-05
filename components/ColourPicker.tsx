@@ -6,6 +6,7 @@ import { Toaster, toast } from 'react-hot-toast';
 import { BiCopy } from 'react-icons/bi';
 import ColourInput from './ColourInput';
 import { ColourContext } from './ColourContext';
+import AllColours from './AllColours';
 
 const notify = (title:string) => toast.success(title,{
     position:'top-center',
@@ -27,9 +28,10 @@ const ColourPicker = () => {
             a: 1,
         }
     );
+    const [isValid, setIsValid] = useState<boolean>(true);
 
     return (
-        <ColourContext.Provider value={{inputColour,setInputColour,color,setColor}}>
+        <ColourContext.Provider value={{inputColour,setInputColour,color,setColor,isValid,setIsValid}}>
             <div className='flex justify-center flex-col items-center gap-6 mt-[80px]'>
 
                 <ColourInput />    
@@ -47,93 +49,22 @@ const ColourPicker = () => {
                         color={color}
                         onChange={(newColor) => {
                             setColor(newColor);
-                            setInputColour(``)
+                            setInputColour(``);
+                            setIsValid(true);
                         }}
                     />
                 </div>
 
-                {/* rgba */}
-                <div className='font-bold text-[22px] flex justify-center items-center'>
-                    <div>
-                        rgba({color.r}, {color.g}, {color.b}, {color.a})
+                {isValid ? (
+                    <AllColours color={color} />
+                    
+                ) : (
+                    <div className='flex flex-col justify-center items-center gap-4'>
+                        <h1 className='font-bold text-[20px]'>
+                            Invalid colour
+                        </h1>
                     </div>
-
-                    <BiCopy 
-                        className='ml-[20px] cursor-pointer'
-                        onClick={() => {
-                            navigator.clipboard.writeText(`rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`)
-                            notify(`rgba(${color.r}, ${color.g}, ${color.b}, ${color.a}) copied to clipboard`) 
-                        }}
-                    />
-                </div>
-
-                {/* rgb */}
-                <div className='font-bold text-[22px] flex justify-center items-center'>
-                    <div>
-                        {rgbaToRgb(color.r, color.g, color.b, color.a)}
-                    </div>
-
-                    <div>
-                        <BiCopy
-                            className='ml-[20px] cursor-pointer'
-                            onClick={() => {
-                                navigator.clipboard.writeText(rgbaToRgb(color.r, color.g, color.b, color.a))
-                                notify(`${rgbaToRgb(color.r, color.g, color.b, color.a)} copied to clipboard`) 
-                            }}
-                        />
-                    </div>
-                </div>
-                
-                {/* Hsl */}
-                <div className='font-bold text-[22px] flex justify-center items-center'>
-                    <div>
-                        {rgbaToHsl(color.r, color.g, color.b, color.a)}
-                    </div>
-
-                    <div>
-                        <BiCopy
-                            className='ml-[20px] cursor-pointer'
-                            onClick={() => {
-                                navigator.clipboard.writeText(rgbaToHsl(color.r, color.g, color.b, color.a))
-                                notify(`${rgbaToHsl(color.r, color.g, color.b, color.a)} copied to clipboard`) 
-                            }}
-                        />
-                    </div>
-                </div>
-
-                {/* Hsla */}
-                <div className='font-bold text-[22px] flex justify-center items-center'>
-                    <div>
-                        {rgbaToHsla(color.r, color.g, color.b, color.a)}
-                    </div>
-
-                    <div>
-                        <BiCopy
-                            className='ml-[20px] cursor-pointer'
-                            onClick={() => {
-                                navigator.clipboard.writeText(rgbaToHsla(color.r, color.g, color.b, color.a))
-                                notify(`${rgbaToHsla(color.r, color.g, color.b, color.a)} copied to clipboard`)
-                            }}
-                        />
-                    </div>
-                </div>
-
-                {/* hex */}
-                <div className='font-bold text-[22px] flex justify-center items-center'>
-                    <div>
-                        {rgbaToHex(color.r, color.g, color.b, color.a)}
-                    </div>
-
-                    <div>
-                        <BiCopy
-                            className='ml-[20px] cursor-pointer'
-                            onClick={() => {
-                                navigator.clipboard.writeText(rgbaToHex(color.r, color.g, color.b, color.a))
-                                notify(`${rgbaToHex(color.r, color.g, color.b, color.a)} copied to clipboard`)
-                            }}
-                        />
-                    </div>
-                </div>
+                )}
 
                 <Toaster />
             </div>
