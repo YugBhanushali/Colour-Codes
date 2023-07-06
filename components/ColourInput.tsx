@@ -32,12 +32,12 @@ const ColourInput = () => {
     <div className="flex flex-col justify-center items-center gap-4">
       <div>
         <h1 className="font-bold text-[20px]">
-            Type the colour in any format (rgba, rgb, hex, hsl, hsla)
+            Type the colour in any format(rgba, rgb, hex, hsl, hsla)
         </h1>
       </div>
       <input
         type="text"
-        className="h-[30px] w-[300px] px-2 py-4 border-black border-2 rounded-lg text-center focus:outline-4 focus:outline-[#007dfa99] focus:outline-offset-2"
+        className="h-[30px] w-[300px] px-2 py-4 border-black border-[3px] rounded-lg text-center  focus:outline-8 focus:outline-[#007dfa99] focus:outline-offset-2"
         style={{
           boxShadow: `0 2px 10px 5px #0000001f`,
         }}

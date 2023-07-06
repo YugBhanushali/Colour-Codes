@@ -28,7 +28,7 @@ const AllColours = ({ color }: colorProps) => {
   return (
     <>
       {/* rgba */}
-      <div className="font-bold text-[22px] flex justify-center items-center">
+      <div className="font-bold text-[22px] flex justify-center items-center hover:border-black border-4 border-transparent px-4 hover:duration-300 hover:ease-in-out ">
         <div>
           rgba({color.r}, {color.g}, {color.b}, {color.a})
         </div>
@@ -47,7 +47,7 @@ const AllColours = ({ color }: colorProps) => {
       </div>
 
       {/* rgb */}
-      <div className="font-bold text-[22px] flex justify-center items-center">
+      <div className="font-bold text-[22px] flex justify-center items-center hover:border-black border-4 border-transparent px-4 hover:duration-500 hover:ease-in-out ">
         <div>{rgbaToRgb(color.r, color.g, color.b, color.a)}</div>
 
         <div>
@@ -71,7 +71,7 @@ const AllColours = ({ color }: colorProps) => {
       </div>
 
       {/* Hsl */}
-      <div className="font-bold text-[22px] flex justify-center items-center">
+      <div className="font-bold text-[22px] flex justify-center items-center hover:border-black border-4 border-transparent px-4 hover:duration-500 hover:ease-in-out ">
         <div>{rgbaToHsl(color.r, color.g, color.b, color.a)}</div>
 
         <div>
@@ -95,7 +95,7 @@ const AllColours = ({ color }: colorProps) => {
       </div>
 
       {/* Hsla */}
-      <div className="font-bold text-[22px] flex justify-center items-center">
+      <div className="font-bold text-[22px] flex justify-center items-center hover:border-black border-4 border-transparent px-4 hover:duration-500 hover:ease-in-out ">
         <div>{rgbaToHsla(color.r, color.g, color.b, color.a)}</div>
 
         <div>
@@ -119,7 +119,7 @@ const AllColours = ({ color }: colorProps) => {
       </div>
 
       {/* hex */}
-      <div className="font-bold text-[22px] flex justify-center items-center">
+      <div className="font-bold text-[22px] flex justify-center items-center hover:border-black border-4 border-transparent px-4 hover:duration-500 hover:ease-in-out ">
         <div>{rgbaToHex(color.r, color.g, color.b, color.a)}</div>
 
         <div>
@@ -142,17 +142,6 @@ const AllColours = ({ color }: colorProps) => {
         </div>
       </div>
 
-      {/* Github */}
-      <div className="font-bold text-[22px] flex justify-center items-center">
-        <div>
-          <Link
-            href="https://github.com/YugBhanushali/Colour-picker/tree/main"
-            target="_blank"
-          >
-            <BsGithub className="cursor-pointer" size={28} />
-          </Link>
-        </div>
-      </div>
     </>
   );
 };

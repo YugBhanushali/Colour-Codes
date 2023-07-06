@@ -3,7 +3,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div  className='flex justify-center items-center mt-[30px]'>
+    <div  className='flex justify-center items-center mt-[30px] mb-[10px]'>
       <p>
         Made with ❤️ by <Link href='https://github.com/YugBhanushali' passHref>Yug Bhanushali</Link>
       </p>

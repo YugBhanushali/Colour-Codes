@@ -201,112 +201,141 @@ export const ColourTypeChecker = (colour: string) => {
       };
     }
   } else if (colour.slice(0, 4).includes("hsla")) {
-    const values: any = colour.match(/\d+(\.\d+)?/g);
-    const hue = parseInt(values[0]);
-    const saturation = parseInt(values[1]);
-    const lightness = parseInt(values[2]);
-    const alpha = parseFloat(values[3]);
-    // Convert HSLA to RGBA
-    const h = hue / 360;
-    const s = saturation / 100;
-    const l = lightness / 100;
 
-    let red, green, blue;
-
-    if (s === 0) {
-      red = green = blue = l;
-    } else {
-      const hueToRgb = (p: any, q: any, t: any) => {
-        if (t < 0) t += 1;
-        if (t > 1) t -= 1;
-        if (t < 1 / 6) return p + (q - p) * 6 * t;
-        if (t < 1 / 2) return q;
-        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-        return p;
-      };
-
-      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-      const p = 2 * l - q;
-
-      red = Math.round(hueToRgb(p, q, h + 1 / 3) * 255);
-      green = Math.round(hueToRgb(p, q, h) * 255);
-      blue = Math.round(hueToRgb(p, q, h - 1 / 3) * 255);
+    if(isValidHSLAColor(colour)){
+      const values: any = colour.match(/\d+(\.\d+)?/g);
+      
+      
+      const hue = parseInt(values[0]);
+      const saturation = parseInt(values[1]);
+      const lightness = parseInt(values[2]);
+      const alpha = parseFloat(values[3]);
+  
+  
+      if ( Number.isNaN(hue) || Number.isNaN(saturation) || Number.isNaN(lightness) || Number.isNaN(alpha) ) {
+        return {
+          type: "invalid",
+        };
+      }
+  
+      // Convert HSLA to RGBA
+      const h = hue / 360;
+      const s = saturation / 100;
+      const l = lightness / 100;
+  
+      let red, green, blue;
+  
+      if (s === 0) {
+        red = green = blue = l;
+      } else {
+        const hueToRgb = (p: any, q: any, t: any) => {
+          if (t < 0) t += 1;
+          if (t > 1) t -= 1;
+          if (t < 1 / 6) return p + (q - p) * 6 * t;
+          if (t < 1 / 2) return q;
+          if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+          return p;
+        };
+  
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+  
+        red = Math.round(hueToRgb(p, q, h + 1 / 3) * 255);
+        green = Math.round(hueToRgb(p, q, h) * 255);
+        blue = Math.round(hueToRgb(p, q, h - 1 / 3) * 255);
+      }
+  
+      if (
+        alpha >= 0 &&
+        alpha <= 1 &&
+        red >= 0 &&
+        red <= 255 &&
+        green >= 0 &&
+        green <= 255 &&
+        blue >= 0 &&
+        blue <= 255
+      ) {
+        return {
+          type: "hsla",
+          red: red,
+          green: green,
+          blue: blue,
+          alpha: alpha,
+        };
+      } else {
+        return {
+          type: "invalid",
+        };
+      }
+    }
+    else{
+      return{
+        type : "invalid"
+      }
     }
 
-    if (
-      alpha >= 0 &&
-      alpha <= 1 &&
-      red >= 0 &&
-      red <= 255 &&
-      green >= 0 &&
-      green <= 255 &&
-      blue >= 0 &&
-      blue <= 255
-    ) {
-      return {
-        type: "hsla",
-        red: red,
-        green: green,
-        blue: blue,
-        alpha: alpha,
-      };
-    } else {
-      return {
-        type: "invalid",
-      };
-    }
   } else if (colour.slice(0, 3).includes("hsl")) {
-    const values: any = colour.match(/\d+(\.\d+)?/g);
-    const hue = parseInt(values[0]);
-    const saturation = parseInt(values[1]);
-    const lightness = parseInt(values[2]);
-    // Convert HSLA to RGBA
-    const h = hue / 360;
-    const s = saturation / 100;
-    const l = lightness / 100;
 
-    let red, green, blue;
-
-    if (s === 0) {
-      red = green = blue = l;
-    } else {
-      const hueToRgb = (p: any, q: any, t: any) => {
-        if (t < 0) t += 1;
-        if (t > 1) t -= 1;
-        if (t < 1 / 6) return p + (q - p) * 6 * t;
-        if (t < 1 / 2) return q;
-        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-        return p;
-      };
-
-      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-      const p = 2 * l - q;
-
-      red = Math.round(hueToRgb(p, q, h + 1 / 3) * 255);
-      green = Math.round(hueToRgb(p, q, h) * 255);
-      blue = Math.round(hueToRgb(p, q, h - 1 / 3) * 255);
+    if(isValidHSLColor(colour)){
+        const values: any = colour.match(/\d+(\.\d+)?/g);
+        const hue = parseInt(values[0]);
+        const saturation = parseInt(values[1]);
+        const lightness = parseInt(values[2]);
+        // Convert HSLA to RGBA
+        const h = hue / 360;
+        const s = saturation / 100;
+        const l = lightness / 100;
+    
+        let red:number, green:number, blue:number;
+    
+        if (s === 0) {
+          red = green = blue = l;
+        } else {
+          const hueToRgb = (p: any, q: any, t: any) => {
+            if (t < 0) t += 1;
+            if (t > 1) t -= 1;
+            if (t < 1 / 6) return p + (q - p) * 6 * t;
+            if (t < 1 / 2) return q;
+            if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+            return p;
+          };
+    
+          const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+          const p = 2 * l - q;
+    
+          red = Math.round(hueToRgb(p, q, h + 1 / 3) * 255);
+          green = Math.round(hueToRgb(p, q, h) * 255);
+          blue = Math.round(hueToRgb(p, q, h - 1 / 3) * 255);
+        }
+    
+        if (
+          red >= 0 &&
+          red <= 255 &&
+          green >= 0 &&
+          green <= 255 &&
+          blue >= 0 &&
+          blue <= 255
+        ) {
+          
+          return {
+            type: "hsl",
+            red: red,
+            green: green,
+            blue: blue,
+            alpha: 1,
+          };
+        } else {
+          return {
+            type: "invalid",
+          };
+        }
+    }
+    else{
+      return{
+        type:"invalid"
+      }
     }
 
-    if (
-      red >= 0 &&
-      red <= 360 &&
-      green >= 0 &&
-      green <= 100 &&
-      blue >= 0 &&
-      blue <= 100
-    ) {
-      return {
-        type: "hsl",
-        red: red,
-        green: green,
-        blue: blue,
-        alpha: 1,
-      };
-    } else {
-      return {
-        type: "invalid",
-      };
-    }
   } else if (colour.slice(0, 1).includes("#")) {
     //valid hex number lenght  is 3,4,6,8
     var hex = colour.replace("#", "");
@@ -358,3 +387,53 @@ export const ColourTypeChecker = (colour: string) => {
     };
   }
 };
+
+
+export const randomColourGenerator = ():{ color: string; shadowColor: string } => {
+  const shadowColorOpacity = 0.3;
+
+  const red = Math.floor(Math.random() * 256);
+  const green = Math.floor(Math.random() * 256);
+  const blue = Math.floor(Math.random() * 256);
+  const alpha = 1; // Fully opaque
+
+  // Create the RGBA color string
+  const color = `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+
+  // Create the shadow color with reduced opacity
+  const shadowColor = `rgba(${red}, ${green}, ${blue}, ${shadowColorOpacity})`;
+
+  // If the generated color is white, recursively call the function again until a non-white color is generated
+  if (red === 255 && green === 255 && blue === 255) {
+    return randomColourGenerator();
+  }
+
+  return { color, shadowColor };
+}
+
+export const stringToRGBA = (color: string): { red: number; green: number; blue: number; alpha: number } => {
+
+  const rgba = color.replace("rgba(", "").replace(")", "").split(",");
+  const red = parseInt(rgba[0]);
+  const green = parseInt(rgba[1]);
+  const blue = parseInt(rgba[2]);
+  const alpha = parseFloat(rgba[3]);
+
+  return { red, green, blue, alpha };
+}
+
+function isValidHSLAColor(color: string): boolean {
+  // Regular expression pattern for validating HSLA color
+  const pattern = /^hsla\(\s*(\d{1,3})\s*,\s*(\d{1,3})%\s*,\s*(\d{1,3})%,\s*((0(\.\d+)?)|1(\.0+)?)\)$/;
+
+  // Test the color against the pattern
+  return pattern.test(color);
+}
+
+function isValidHSLColor(color: string): boolean {
+  // Regular expression pattern for validating HSL color
+  const pattern = /^hsl\(\s*(\d{1,3})\s*,\s*(\d{1,3})%\s*,\s*(\d{1,3})%\s*\)$/;
+
+  // Test the color against the pattern
+  return pattern.test(color);
+}
