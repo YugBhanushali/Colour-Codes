@@ -1,35 +1,77 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Colour Codes
+
+![ColourCodes](./public/assets/colour-code-demo.png)
+
+[Colour Codes](https://colourcodes.vercel.app) is a powerful color conversion app built with Next.js, TypeScript, and Tailwind CSS. It provides a seamless and efficient solution for converting colors between various formats, including RGBA, RGB, HSL, HSLA, and Hex. With support for Tailwind colors, Colour Codes enables designers, developers, and artists to explore, transform, and perfect their color palettes with ease.
+
+## Features
+
+- **Effortless Color Conversion:** Convert colors between RGBA, RGB, HSL, HSLA, and Hex formats effortlessly.
+- **Tailwind Color Support:** Seamlessly integrate with Tailwind CSS and leverage its extensive color palette.
+- **User-Friendly Interface:** Enjoy a sleek and intuitive interface designed to enhance your workflow.
+- **Precise Color Translations:** Achieve precise color translations for consistency across different platforms.
+
+## Technologies Used
+
+- **Next.js:** A React framework for building fast and scalable web applications.
+- **TypeScript:** A statically typed superset of JavaScript that enhances development productivity.
+- **Tailwind CSS:** A utility-first CSS framework for creating custom designs with ease.
 
 ## Getting Started
 
-First, run the development server:
+To get started with Colour Codes, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+1. **Clone the repository:**
+   ```
+   git clone https://github.com/your-username/colour-codes.git
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies:**
+   ```
+   cd colour-codes
+   npm install
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Run the development server:**
+   ```
+   npm run dev
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. **Open Colour Codes in your browser:**
+   ```
+   http://localhost:3000
+   ```
 
-## Learn More
+## Contributing
 
-To learn more about Next.js, take a look at the following resources:
+We welcome contributions from the community! If you have any ideas, suggestions, or bug reports, please feel free to open an issue or submit a pull request.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To contribute to Colour Codes, follow these steps:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Fork the repository and create your branch:
+   ```
+   git checkout -b my-feature
+   ```
 
-## Deploy on Vercel
+2. Make your changes and commit them:
+   ```
+   git commit -m "Add my feature"
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Push your changes to your forked repository:
+   ```
+   git push origin my-feature
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# Colour-picker
+4. Open a pull request in the main repository and describe your changes.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Acknowledgments
+
+Start exploring the world of color conversion and unleash your creativity with Colour Codes! If you have any questions or need assistance, please don't hesitate to reach out.
+
+Happy coding!
+Yug Bhanushali
