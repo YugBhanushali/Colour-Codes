@@ -1,4 +1,5 @@
 import {
+  rgbaToAll,
   rgbaToHex,
   rgbaToHsl,
   rgbaToHsla,
@@ -25,12 +26,22 @@ type colorProps = {
 };
 
 const AllColours = ({ color }: colorProps) => {
+  const allColours: {
+    hex: string;
+    rgb: string;
+    rgba: string;
+    hsl: string;
+    hsla: string;
+    tailwind: string;
+  } = rgbaToAll(color.r, color.g, color.b, color.a);
+
+
   return (
     <>
       {/* rgba */}
       <div className="font-bold sm:text-[22px] text-[18px] flex justify-center items-center hover:border-black border-4 border-transparent px-4 hover:duration-300 hover:ease-in-out ">
         <div>
-          rgba({color.r}, {color.g}, {color.b}, {color.a})
+          {allColours.rgba}
         </div>
 
         <BiCopy
@@ -48,7 +59,7 @@ const AllColours = ({ color }: colorProps) => {
 
       {/* rgb */}
       <div className="font-bold sm:text-[22px] text-[18px] flex justify-center items-center hover:border-black border-4 border-transparent px-4 hover:duration-500 hover:ease-in-out ">
-        <div>{rgbaToRgb(color.r, color.g, color.b, color.a)}</div>
+        <div>{allColours.rgb}</div>
 
         <div>
           <BiCopy
@@ -72,7 +83,7 @@ const AllColours = ({ color }: colorProps) => {
 
       {/* Hsl */}
       <div className="font-bold sm:text-[22px] text-[18px] flex justify-center items-center hover:border-black border-4 border-transparent px-4 hover:duration-500 hover:ease-in-out ">
-        <div>{rgbaToHsl(color.r, color.g, color.b, color.a)}</div>
+        <div>{allColours.hsl}</div>
 
         <div>
           <BiCopy
@@ -96,7 +107,7 @@ const AllColours = ({ color }: colorProps) => {
 
       {/* Hsla */}
       <div className="font-bold sm:text-[22px] text-[18px] flex justify-center items-center hover:border-black border-4 border-transparent px-4 hover:duration-500 hover:ease-in-out ">
-        <div>{rgbaToHsla(color.r, color.g, color.b, color.a)}</div>
+        <div>{allColours.hsla}</div>
 
         <div>
           <BiCopy
@@ -120,7 +131,7 @@ const AllColours = ({ color }: colorProps) => {
 
       {/* hex */}
       <div className="font-bold sm:text-[22px] text-[18px] flex justify-center items-center hover:border-black border-4 border-transparent px-4 hover:duration-500 hover:ease-in-out ">
-        <div>{rgbaToHex(color.r, color.g, color.b, color.a)}</div>
+        <div>{allColours.hex}</div>
 
         <div>
           <BiCopy
@@ -142,6 +153,29 @@ const AllColours = ({ color }: colorProps) => {
         </div>
       </div>
 
+      {/* tailwind */}
+      <div onMouseEnter={()=>
+        toast.success("This Tailwind color is the nearest color in tailwind palette", {
+          position: "top-center",
+          duration: 5000
+        })
+        } className="font-bold sm:text-[22px] text-[18px] flex justify-center items-center hover:border-black border-4 border-transparent px-4 hover:duration-500 hover:ease-in-out ">
+        <div>
+          {allColours.tailwind}
+        </div>
+
+        <div>
+          <BiCopy
+            className="ml-[20px] cursor-pointer"
+            onClick={() => {
+              navigator.clipboard.writeText(
+                allColours.tailwind
+              );
+              notify(`${allColours.tailwind} copied to clipboard`);
+            }}
+          />
+        </div>
+      </div>
     </>
   );
 };

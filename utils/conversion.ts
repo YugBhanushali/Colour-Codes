@@ -1,5 +1,7 @@
 // make a function which convert rgba to hex
 import { type } from "os";
+import { tailwindColors } from "./constants";
+
 
 export const rgbaToHex = (
   red: number,
@@ -436,4 +438,62 @@ function isValidHSLColor(color: string): boolean {
 
   // Test the color against the pattern
   return pattern.test(color);
+}
+
+export function getNearestTailwindColor(hexCode:string) {
+  function calculateColorDifference(hex1:string, hex2:string) {
+    const r1 = parseInt(hex1.slice(1, 3), 16);
+    const g1 = parseInt(hex1.slice(3, 5), 16);
+    const b1 = parseInt(hex1.slice(5, 7), 16);
+
+    const r2 = parseInt(hex2.slice(1, 3), 16);
+    const g2 = parseInt(hex2.slice(3, 5), 16);
+    const b2 = parseInt(hex2.slice(5, 7), 16);
+
+    const diff = Math.sqrt((r1 - r2) ** 2 + (g1 - g2) ** 2 + (b1 - b2) ** 2);
+    return diff;
+  }
+
+  let nearestColor = '';
+  let minDiff = Infinity;
+
+  for (const colorKey in tailwindColors) {
+    const colorValue = tailwindColors[colorKey];
+
+    if (typeof colorValue === 'string') {
+      const diff = calculateColorDifference(hexCode, colorValue);
+      if (diff < minDiff) {
+        minDiff = diff;
+        nearestColor = colorKey;
+      }
+    } else {
+      for (const shadeKey in colorValue) {
+        const shadeValue = colorValue[shadeKey];
+        const diff = calculateColorDifference(hexCode, shadeValue);
+        if (diff < minDiff) {
+          minDiff = diff;
+          nearestColor = `${colorKey}-${shadeKey}`;
+        }
+      }
+    }
+  }
+  return nearestColor;
+}
+
+
+export const rgbaToAll = (red:number,green:number,blue:number,alpha:number) => {
+  const hex = rgbaToHex(red,green,blue,alpha);
+  const hsl = rgbaToHsl(red,green,blue,alpha);
+  const hsla = rgbaToHsla(red,green,blue,alpha);
+  const rgb = `rgb(${red},${green},${blue})`;
+  const rgba = `rgba(${red},${green},${blue},${alpha})`;
+  const tailwind = getNearestTailwindColor(hex);
+  return {
+    hex,
+    hsl,
+    hsla,
+    rgb,
+    rgba,
+    tailwind
+  };
 }
