@@ -154,12 +154,7 @@ const AllColours = ({ color }: colorProps) => {
       </div>
 
       {/* tailwind */}
-      <div onMouseEnter={()=>
-        toast.success("This Tailwind color is the nearest color in tailwind palette", {
-          position: "top-center",
-          duration: 5000
-        })
-        } className="font-bold sm:text-[22px] text-[18px] flex justify-center items-center hover:border-black border-4 border-transparent px-4 hover:duration-500 hover:ease-in-out ">
+      <div className="font-bold sm:text-[22px] text-[18px] flex justify-center items-center hover:border-black border-4 border-transparent px-4 hover:duration-500 hover:ease-in-out ">
         <div>
           {allColours.tailwind}
         </div>
@@ -172,6 +167,9 @@ const AllColours = ({ color }: colorProps) => {
                 allColours.tailwind
               );
               notify(`${allColours.tailwind} copied to clipboard`);
+              notify(
+                `This is the nearest tailwind colour`
+              );
             }}
           />
         </div>

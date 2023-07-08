@@ -6,7 +6,7 @@ import {
   rgbaToHsla,
   rgbaToRgb,
 } from "@/utils/conversion";
-import React, { use, useEffect, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import {
   HexColorPicker,
   RgbaColorPicker,
@@ -17,13 +17,19 @@ import { BiCopy } from "react-icons/bi";
 import ColourInput from "./ColourInput";
 import { ColourContext } from "./ColourContext";
 import AllColours from "./AllColours";
+import DisplayColour from "./DisplayColour";
 
 const notify = (title: string) =>
   toast.success(title, {
     position: "top-center",
   });
 
-const ColourPicker = (randomColor: { r: number; g: number , b:number , a:number }) => {
+const ColourPicker = (randomColor: {
+  r: number;
+  g: number;
+  b: number;
+  a: number;
+}) => {
   const [inputColour, setInputColour] = useState(`` as string);
   const [color, setColor] = useState<{
     r: number;
@@ -37,16 +43,16 @@ const ColourPicker = (randomColor: { r: number; g: number , b:number , a:number 
     a: 1,
   });
   const [isValid, setIsValid] = useState<boolean>(true);
+  const [colorChart, setColorChart] = useState<any>(false);
 
-    useEffect(() => {
-        setColor({
-            r: randomColor.r,
-            g: randomColor.g,
-            b: randomColor.b,
-            a: randomColor.a,
-        });
-    }
-    , [randomColor]);
+  useEffect(() => {
+    setColor({
+      r: randomColor.r,
+      g: randomColor.g,
+      b: randomColor.b,
+      a: randomColor.a,
+    });
+  }, [randomColor]);
 
   return (
     <ColourContext.Provider
@@ -89,6 +95,28 @@ const ColourPicker = (randomColor: { r: number; g: number , b:number , a:number 
           </div>
         )}
 
+        {colorChart ? (
+          <>
+            <div
+              onClick={() => {
+                setColorChart(false);
+              }}
+              className=" font-bold sm:text-[20px] text-[18px] cursor-pointer"
+            >
+              Hide colour chart
+            </div>
+            <DisplayColour />
+          </>
+        ) : (
+          <div
+            onClick={() => {
+              setColorChart(true);
+            }}
+            className=" font-bold sm:text-[20px] text-[18px] cursor-pointer"
+          >
+            Show colour chart
+          </div>
+        )}
         <Toaster />
       </div>
     </ColourContext.Provider>
