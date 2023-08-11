@@ -33,13 +33,13 @@ export default function RootLayout({
         <meta property="og:description" content={metadata.description}/>
         <meta property="og:url" content={WEBSITE_URL} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={`${WEBSITE_URL}/icon.png`} />
+        <meta property="og:image" content={`${WEBSITE_URL}icon.png`} />
         <meta property="og:image:alt" content="Colour Codes" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Colour Codes" />
         <meta name="twitter:description" content={metadata.description}/>
-        <meta name="twitter:image" content={`${WEBSITE_URL}/icon.png`} />
+        <meta name="twitter:image" content={`${WEBSITE_URL}icon.png`} />
         <meta name="twitter:image:alt" content="Colour Codes" />
         
         <link rel="icon" href="/icon.png" type='image/png' />
