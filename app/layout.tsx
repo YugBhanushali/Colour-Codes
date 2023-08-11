@@ -27,6 +27,7 @@ export default function RootLayout({
         <title>{metadata.title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta name="description" content={metadata.description}/>
+        <meta name="keywords" content="color, color converter, color codes, color codes converter, color converter app, color codes app, color codes converter app, color converter online, color codes online, color codes converter online, color converter tool, color codes tool, color codes converter tool, color converter rgb, color codes rgb, color codes converter rgb, color converter hex, color codes hex, color codes converter hex, color converter hsl, color codes hsl, color codes converter hsl, color converter rgba, color codes rgba, color codes converter rgba, color converter hsla, color codes hsla, color codes converter hsla, color converter rgb to hex, color codes rgb to hex, color codes converter rgb to hex, color converter hex to rgb, color codes hex to rgb, color codes converter hex to rgb, color converter rgb to hsl, color codes rgb to hsl, color codes converter rgb to hsl, color converter hsl to rgb, color codes hsl to rgb, color codes converter hsl to rgb"/>
         
         <meta property="og:site_name" content="Colour Codes" />
         <meta property="og:title" content="Colour Codes" />
